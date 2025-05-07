@@ -12,9 +12,8 @@ def print_all_footballer():
     sql = "SELECT * FROM footballer;"
     cursor.execute(sql)
     results = cursor.fetchall()
-    print(results)
+    print(f"Footballer: {footballer[1]} Goals: {footballer[2]} National team: {footballer[3]}")
     db.close
 
 #main code
-for footballer in results
-    print(f"Footballer name: ")
+print_all_footballer
