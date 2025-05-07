@@ -42,7 +42,9 @@ def print_all_footballer_by_goals_desc():
 def search_footballers_by_nationality():
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = "SELECT * FROM footballer ORDER BY Goals DESC;"
+    nationality_response = input("What nationality? ")
+    nationality_response_lower = nationality_response.lower()
+    sql = "SELECT * FROM footballer WHERE nationality = 'nationality_response_lower';"
     cursor.execute(sql)
     footballer = cursor.fetchall()
 
@@ -60,4 +62,4 @@ def search_footballers_by_nationality():
 #footballer = cursor.fetchall()
 
 #main code
-print_all_footballer_by_goals_desc()
+search_footballers_by_nationality()
