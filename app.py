@@ -66,4 +66,3 @@ def search_footballers_by_club_name():
     db.close()
 
 #main code
-search_footballers_by_club_name()
