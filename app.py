@@ -57,7 +57,7 @@ def search_footballers_by_club_name():
     cursor = db.cursor()
     club_response = input("What club? ")
     club_response_title = club_response.title()
-    sql = "SELECT * FROM teams WHERE team_name = ?;" 
+    sql = "SELECT * FROM footballers WHERE team_name = ?;" 
     cursor.execute(sql, (club_response_title,))
     team_name = cursor.fetchall()
     print("Footballer:            Goals:     National team:")
