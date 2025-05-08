@@ -15,7 +15,7 @@ def print_all_footballer():
     print("Footballer:            Goals:     National team:")
     for footballer in footballer:
         print(f"{footballer[1] :<22} {footballer[2]:<10} {footballer[3]}")
-    db.close
+    db.close()
 
 def print_all_footballer_by_goals_asc():
     db = sqlite3.connect(DATABASE)
@@ -26,7 +26,7 @@ def print_all_footballer_by_goals_asc():
     print("Footballer:            Goals:     National team:")
     for footballer in footballer:
         print(f"{footballer[1] :<22} {footballer[2]:<10} {footballer[3]}")
-    db.close
+    db.close()
 
 def print_all_footballer_by_goals_desc():
     db = sqlite3.connect(DATABASE)
@@ -37,7 +37,7 @@ def print_all_footballer_by_goals_desc():
     print("Footballer:            Goals:     National team:")
     for footballer in footballer:
         print(f"{footballer[1] :<22} {footballer[2]:<10} {footballer[3]}")
-    db.close
+    db.close()
 
 def search_footballers_by_nationality():
     db = sqlite3.connect(DATABASE)
@@ -50,36 +50,20 @@ def search_footballers_by_nationality():
     print("Footballer:            Goals:     National team:")
     for footballer in footballer:
      print(f"{footballer[1] :<22} {footballer[2]:<10} {footballer[3]}")
-    db.close
+    db.close()
 
 def search_footballers_by_club_name():
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
     club_response = input("What club? ")
     club_response_title = club_response.title()
-    sql = "SELECT * FROM footballers WHERE team_name = ?;" 
+    sql = "SELECT Footballer.name, Footballer.goals, Footballer.nationality FROM Footballer JOIN Teams ON Footballer.team_id = Teams.team_id WHERE Teams.team_name = ?;" 
     cursor.execute(sql, (club_response_title,))
-    team_name = cursor.fetchall()
+    footballer = cursor.fetchall()
     print("Footballer:            Goals:     National team:")
-    for footballer in team_name:
-     print(f"{footballer[1] :<22} {footballer[2]:<10} {footballer[3]}")
-    db.close
-
-
-def test():
-    db = sqlite3.connect(DATABASE)
-    cursor = db.cursor()
-    club_response = input("What club? ")
-    club_response_title = club_response.title()
-    sql = "SELECT * FROM footballers WHERE team_name = ?;" 
-    cursor.execute(sql, (club_response_title,))
-    team_name = cursor.fetchall()
-    print(team_name)
-    db.close
-
-
-
-
+    for footballer in footballer:
+     print(f"{footballer[0] :<22} {footballer[1]:<10} {footballer[2]}")
+    db.close()
 
 #main code
-test()
+search_footballers_by_club_name()
