@@ -55,14 +55,27 @@ def search_footballers_by_nationality():
 def search_footballers_by_club_name():
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    club_response = input("What club? ")
-    club_response_title = club_response.title()
+    play_club_response = input("What club do they play for? ")
+    play_club_response_title = play_club_response.title()
     sql = "SELECT Footballer.name, Footballer.goals, Footballer.nationality FROM Footballer JOIN Teams ON Footballer.team_id = Teams.team_id WHERE Teams.team_name = ?;" 
-    cursor.execute(sql, (club_response_title,))
+    cursor.execute(sql, (play_club_response_title,))
     footballer = cursor.fetchall()
     print("Footballer:            Goals:     National team:")
     for footballer in footballer:
      print(f"{footballer[0] :<22} {footballer[1]:<10} {footballer[2]}")
     db.close()
 
+def search_team_name_for_home_ground():
+    db = sqlite3.connect(DATABASE)
+    cursor = db.cursor()
+    home_ground_club_response = input("What clubs home ground are you looking for? ")
+    home_ground_club_response_title = home_ground_club_response.title()
+    sql = "SELECT * FROM Teams;" 
+    cursor.execute(sql)
+    home_ground, team_name = cursor.fetchall()
+    print("Club team:            Home ground:")
+    for footballer in home_ground:
+        print(f"{team_name[1] :<15} {home_ground[2]}")
+
 #main code
+search_team_name_for_home_ground()
