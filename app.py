@@ -70,12 +70,12 @@ def search_team_name_for_home_ground():
     cursor = db.cursor()
     home_ground_club_response = input("What clubs home ground are you looking for? ")
     home_ground_club_response_title = home_ground_club_response.title()
-    sql = "SELECT * FROM Teams;" 
-    cursor.execute(sql)
-    home_ground, team_name = cursor.fetchall()
+    sql = "SELECT * FROM Teams WHERE team_name = ?;" 
+    cursor.execute(sql, (home_ground_club_response_title,))
+    home_ground = cursor.fetchall()
     print("Club team:            Home ground:")
     for footballer in home_ground:
-        print(f"{team_name[1] :<15} {home_ground[2]}")
+        print(f"{footballer[1] :<21} {footballer[2]}")
 
 #main code
 search_team_name_for_home_ground()
