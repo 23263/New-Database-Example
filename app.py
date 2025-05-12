@@ -77,5 +77,35 @@ def search_team_name_for_home_ground():
     for footballer in home_ground:
         print(f"{footballer[1] :<21} {footballer[2]}")
 
+def search_home_ground_for_team_name():
+    db = sqlite3.connect(DATABASE)
+    cursor = db.cursor()
+    home_ground_club_response = input("What home ground does the club your looking for play at? ")
+    home_ground_club_response_title = home_ground_club_response.title()
+    sql = "SELECT * FROM Teams WHERE home_ground = ?;" 
+    cursor.execute(sql, (home_ground_club_response_title,))
+    club = cursor.fetchall()
+    print("Home Ground:            Club:")
+    for footballer in club:
+        print(f"{footballer[2] :<23} {footballer[1]}")
+
 #main code
-search_team_name_for_home_ground()
+while True: 
+    user_input = input("What would you like to do? \nPress 1 for print all footballer data \nprint all footballers by goals from least to most \n3 for print all footballers by goals from most to least \n4 for search footballers by nationality \n5 for search footballer by club name \n6 for search for team name by home ground \n7 for search for home ground by team name8 to stop.")
+    if user_input ==  "1":
+        print_all_footballer()
+    elif user_input == "2":
+        print_all_footballer_by_goals_asc()
+    elif user_input == "3":
+        print_all_footballer_by_goals_desc()
+    elif user_input == "4":
+        search_footballers_by_nationality()
+    elif user_input == "5":
+        search_footballers_by_club_name()
+    elif user_input == "6":
+        search_team_name_for_home_ground()
+    elif user_input == "7":
+        search_home_ground_for_team_name()
+    elif user_input == "8":
+        break
+    else: print("That is not an option.")
