@@ -89,9 +89,23 @@ def search_home_ground_for_team_name():
     for footballer in club:
         print(f"{footballer[2] :<23} {footballer[1]}")
 
+def search_players_by_more_goals_than_response():
+    db = sqlite3.connect(DATABASE)
+    cursor = db.cursor()
+    more_goals_than_response = input("How many goals should the player have more than?")
+
+
 #main code
 while True: 
-    user_input = input("What would you like to do? \nPress 1 for print all footballer data \nprint all footballers by goals from least to most \n3 for print all footballers by goals from most to least \n4 for search footballers by nationality \n5 for search footballer by club name \n6 for search for team name by home ground \n7 for search for home ground by team name8 to stop.")
+    user_input = input("What would you like to do?\n"
+                        "1: Print all footballer data\n"
+                        "2: Print all footballers by goals from least to most\n" 
+                        "3: print all footballers by goals from most to least\n"
+                        "4: Search footballers by nationality\n"
+                        "5: Search footballer by club name\n"
+                        "6: Search for team name by home ground\n"
+                        "7: Search for home ground by team name\n"
+                        "8: Stop\n")
     if user_input ==  "1":
         print_all_footballer()
     elif user_input == "2":
