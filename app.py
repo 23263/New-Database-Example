@@ -39,6 +39,18 @@ def print_all_footballer_by_goals_desc():
         print(f"{footballer[1] :<22} {footballer[2]:<10} {footballer[3]}")
     db.close()
 
+def search_players_by_more_goals_than_response():
+    db = sqlite3.connect(DATABASE)
+    cursor = db.cursor()
+    more_goals_than_response = input("How many goals should the player have more than? ")
+    sql = "SELECT * FROM Footballer WHERE goals > ? ORDER BY goals ASC"
+    cursor.execute(sql, (more_goals_than_response,))
+    goals = cursor.fetchall()
+    print("Footballer:            Goals:     National team:")
+    for footballer in goals:
+        print(f"{footballer[1] :<22} {footballer[2]:<10} {footballer[3]}")
+    db.close()
+
 def search_footballers_by_nationality():
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
@@ -89,10 +101,6 @@ def search_home_ground_for_team_name():
     for footballer in club:
         print(f"{footballer[2] :<23} {footballer[1]}")
 
-def search_players_by_more_goals_than_response():
-    db = sqlite3.connect(DATABASE)
-    cursor = db.cursor()
-    more_goals_than_response = input("How many goals should the player have more than?")
 
 
 #main code
@@ -113,13 +121,15 @@ while True:
     elif user_input == "3":
         print_all_footballer_by_goals_desc()
     elif user_input == "4":
-        search_footballers_by_nationality()
+        search_players_by_more_goals_than_response()
     elif user_input == "5":
-        search_footballers_by_club_name()
+        search_footballers_by_nationality()
     elif user_input == "6":
-        search_team_name_for_home_ground()
+        search_footballers_by_club_name()
     elif user_input == "7":
-        search_home_ground_for_team_name()
+        search_team_name_for_home_ground()
     elif user_input == "8":
+        search_home_ground_for_team_name()
+    elif user_input == "9":
         break
     else: print("That is not an option.")
